@@ -4,6 +4,8 @@
   "description": "An app to track all your expenses",
   "main": "app.js",
   "scripts": {
+    "build": "webpack",
+    "dev-server": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
