@@ -142,24 +142,45 @@ const filtersReducer = (state = filtersDefaultState, action) => {
   }
 }
 
+// Get Visible expenses
+const getVisibleExpenses = (expenses, {text, sortBy, startDate, endDate}) => {
+  return expenses.filter(expense => {
+    const startDateMatch = typeof startDate !== 'number' || expense.createdAt >= startDate;
+    const endDateMatch  = typeof endDate !== 'number' || expense.createdAt <= endDate;
+    const textMatch = expense.description.toLowerCase().includes(text.toLowerCase());
+
+    return startDateMatch && endDateMatch && textMatch;
+  }).sort((a, b) => {
+    if (sortBy === 'date') {
+      return a.createdAt < b.createdAt ? 1 : -1;
+    }
+    else {
+      return a.amount < b.amount ? 1 : -1;
+    }
+  });
+};
+
+// Store Creation
 const store = createStore(combineReducers({
   expenses: expensesReducer,
   filters: filtersReducer
 }));
 
 store.subscribe(()=> {
-  console.log(store.getState());
+  const state = store.getState();
+  const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
+  console.log(visibleExpenses);
 });
 
-const expesnseOne = store.dispatch(addExpense({description: 'Rent', amount: 12400}));
-const expenseTwo = store.dispatch(addExpense({description: 'Coffee', amount: 100}));
-store.dispatch(removeExpense({id: expesnseOne.expense.id}));
-store.dispatch(editExpense(expenseTwo.expense.id, {amount: 300}));
+const expesnseOne = store.dispatch(addExpense({description: 'Rent', amount: 400, createdAt: 2000}));
+const expenseTwo = store.dispatch(addExpense({description: 'Coffee', amount: 1200, createdAt: 1000}));
+// store.dispatch(removeExpense({id: expesnseOne.expense.id}));
+// store.dispatch(editExpense(expenseTwo.expense.id, {amount: 300}));
 
-store.dispatch(setTextFilter('Rent'));
+// store.dispatch(setTextFilter('ffe'));
 store.dispatch(sortByAmount());
-store.dispatch(sortByDate());
-store.dispatch(setStartDate(10350));
-store.dispatch(setStartDate());
-store.dispatch(setEndDate(150));
-store.dispatch(setEndDate());
+// store.dispatch(sortByDate());
+// store.dispatch(setStartDate(125));
+// store.dispatch(setStartDate());
+// store.dispatch(setEndDate(1250));
+// store.dispatch(setEndDate());
