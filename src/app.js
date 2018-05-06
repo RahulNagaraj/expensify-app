@@ -24,9 +24,9 @@ store.dispatch(addExpense({description: 'Water bill', amount: 600, createdAt: 90
 
 store.dispatch(setTextFilter('bill'));
 
-setTimeout(() => {
-  store.dispatch(setTextFilter('water'));
-}, 3000);
+// setTimeout(() => {
+//   store.dispatch(setTextFilter('water'));
+// }, 3000);
 
 const jsx = (
   <Provider store={store}>
