@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import 'react-dates/initialize';
-import 'react-dates/lib/css/_datepicker.css';
-
 import { DateRangePicker } from 'react-dates';
 import {
   setTextFilter,
