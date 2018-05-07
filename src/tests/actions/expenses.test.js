@@ -1,4 +1,5 @@
 import { addExpense, removeExpense, editExpense } from '../../actions/expenses';
+import expenses from '../fixtures/expenses';
 
 test('should setup remove action object', () => {
   const action = removeExpense({ id: '123abc' });
@@ -26,32 +27,31 @@ test('should setup edit expense object', () => {
 });
 
 test('should setup add expense action objcect with values', () => {
-  const data = {
-    description: 'rent',
-    amount: 12000,
-    createdAt: 1000000,
-    note: 'Last month rent'
-  };
-  const action = addExpense(data);
+  const action = addExpense(expenses[2]);
   expect(action).toEqual({
     type: 'ADD_EXPENSE',
-    expense: {
-      id: expect.any(String),
-      ...data
-    }
+    expense: expenses[2]
   });
 });
 
-test('should setup add expense action objcect without values', () => {
-  const action = addExpense();
-  expect(action).toEqual({
-    type: 'ADD_EXPENSE',
-    expense: {
-      id: expect.any(String),
-      description: '',
-      note: '',
-      amount: 0,
-      createdAt: 0
-    }
-  });
+test('should add expense to database and store', () => {
+
 });
+
+test('should add expense with defaults to database and store', () => {
+
+});
+
+// test('should setup add expense action objcect without values', () => {
+//   const action = addExpense();
+//   expect(action).toEqual({
+//     type: 'ADD_EXPENSE',
+//     expense: {
+//       id: expect.any(String),
+//       description: '',
+//       note: '',
+//       amount: 0,
+//       createdAt: 0
+//     }
+//   });
+// });

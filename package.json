@@ -7,7 +7,7 @@
     "build:dev": "webpack",
     "build:prod": "webpack -p --env production",
     "dev-server": "webpack-dev-server",
-    "test": "jest",
+    "test": "cross-env NODE_ENV=test jest",
     "start": "node server/server.js",
     "heroku-postbuild": "npm run build:prod"
   },
@@ -45,6 +45,7 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "redux": "^4.0.0",
+    "redux-thunk": "^2.2.0",
     "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
     "uuid": "^3.2.1",
@@ -52,7 +53,10 @@
     "webpack": "^4.6.0"
   },
   "devDependencies": {
+    "cross-env": "^5.1.4",
+    "dotenv": "^5.0.1",
     "jest": "^22.4.3",
+    "redux-mock-store": "^1.5.1",
     "webpack-cli": "^2.0.15",
     "webpack-dev-server": "^3.1.3"
   }
